@@ -138,6 +138,12 @@
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
 
+        <!-- LCD density -->
+        <ListPreference
+                android:key="lcd_density"
+                android:title="@string/lcd_density"
+                android:persistent="false" />
+
         <!-- Font size -->
         <com.android.settings.FontDialogPreference
                 android:key="font_size"
