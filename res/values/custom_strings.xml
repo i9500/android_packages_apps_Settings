@@ -49,4 +49,9 @@
     <string name="quick_settings_category">Quick settings</string>
     <string name="block_on_secure_keyguard_title">Disable on lock screen</string>
     <string name="block_on_secure_keyguard_summary">Disable quick settings on secure lock screen</string>
+
+    <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
+    <string name="show_cpu_info">Show CPU info</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
+    <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
 </resources>
