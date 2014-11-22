@@ -25,4 +25,7 @@
     <!-- About phone screen, Free memory info -->
     <string name="mem_info">Memory</string>
     <!-- About phone screen, status item label -->
+
+    <!--Back to kill timeout -->
+    <string name="long_press_kill_delay">App kill delay</string>
 </resources>
