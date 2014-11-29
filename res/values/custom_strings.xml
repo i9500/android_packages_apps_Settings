@@ -31,4 +31,10 @@
 
     <!--Back to kill timeout -->
     <string name="long_press_kill_delay">App kill delay</string>
+
+    <!--Power menu -->
+    <string name="actions_category">Actions</string>
+    <string name="power_category">Power key</string>
+    <string name="lockscreen_enable_power_menu_title">Show power menu lock screen</string>
+    <string name="lockscreen_enable_power_menu_summary">This option will only disable the power menu on secure lock screens</string>
 </resources>
