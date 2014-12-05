@@ -17,6 +17,10 @@
     <!-- Custom settings  -->
     <string name="custom_settings_title">Custom</string>
 
+    <!-- Updater -->
+    <string name="updater_title">Updates</string>
+    <string name="updater_summary">Check for updates and more</string>
+
     <!-- About phone screen,  Mod Version -->
     <string name="mod_version_eos">Euphoria version</string>
     <string name="mod_version_default">Unknown</string>
