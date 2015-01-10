@@ -65,6 +65,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
+import com.android.settings.cyanogenmod.SystemSettingSwitchPreference;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -95,6 +97,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_STYLUS_GESTURES = "stylus_gestures";
     private static final String KEY_STYLUS_ICON_ENABLED = "stylus_icon_enabled";
     private static final String KEY_VOICE_WAKEUP = "voice_wakeup";
+    private static final String KEY_FULL_SCREEN_KEYBOARD = "fullscreen_keyboard_mode";
 
     private static final String VOICE_CATEGORY_KEY = "voice_category";
     private static final String VOICE_WAKEUP_PACKAGE = "com.cyanogenmod.voicewakeup";
@@ -110,6 +113,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private PreferenceCategory mKeyboardSettingsCategory;
     private PreferenceCategory mHardKeyboardCategory;
     private PreferenceCategory mGameControllerCategory;
+    private SystemSettingSwitchPreference mFullScreenKeyboard;
     private Preference mLanguagePref;
     private PreferenceScreen mStylusGestures;
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
@@ -232,9 +236,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (!Utils.isPhone(getActivity())) {
-            getPreferenceScreen().removePreference(
-                    findPreference(Settings.System.FULLSCREEN_KEYBOARD_MODE));
+        mFullScreenKeyboard = (
+                SystemSettingSwitchPreference) findPreference(KEY_FULL_SCREEN_KEYBOARD);
+        if (mFullScreenKeyboard != null && !Utils.isPhone(getActivity())) {
+            getPreferenceScreen().removePreference(mFullScreenKeyboard);
         }
 
         // Spell Checker
