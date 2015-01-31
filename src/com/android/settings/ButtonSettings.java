@@ -79,7 +79,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_RECENTS_LONG_PRESS = "navigation_recents_long_press";
     private static final String KEY_POWER_END_CALL = "power_end_call";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
-    private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
 
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
@@ -90,7 +89,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
-    private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String CATEGORY_NAVBAR = "navigation_bar_category";
 
     // Available custom actions to perform on a key press.
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
@@ -195,35 +194,31 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION, 0);
             mSwapVolumeButtons = (SwitchPreference)
                     prefScreen.findPreference(KEY_SWAP_VOLUME_BUTTONS);
-            mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
-
-            mVolumeDefault = (ListPreference) findPreference(KEY_VOLUME_DEFAULT);
-            String currentDefault = Settings.System.getString(getContentResolver(),
-                Settings.System.VOLUME_KEYS_DEFAULT);
-            boolean linkNotificationWithVolume = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
-            if (!Utils.isVoiceCapable(getActivity())) {
-                removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_RING));
-            } else if (linkNotificationWithVolume && Utils.isVoiceCapable(getActivity())) {
-                removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_NOTIFICATION));
+            if (mSwapVolumeButtons != null) {
+                mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
             }
-            if (currentDefault == null) {
-                currentDefault = mVolumeDefault.getEntryValues()
-                    [mVolumeDefault.getEntryValues().length - 1].toString();
-                mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
+
+            if (mVolumeDefault != null) {
+                mVolumeDefault = (ListPreference) findPreference(KEY_VOLUME_DEFAULT);
+                String currentDefault = Settings.System.getString(getContentResolver(),
+                    Settings.System.VOLUME_KEYS_DEFAULT);
+                boolean linkNotificationWithVolume = Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
+                if (!Utils.isVoiceCapable(getActivity())) {
+                    removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_RING));
+                } else if (linkNotificationWithVolume && Utils.isVoiceCapable(getActivity())) {
+                    removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_NOTIFICATION));
+                }
+                if (currentDefault == null) {
+                    currentDefault = mVolumeDefault.getEntryValues()
+                        [mVolumeDefault.getEntryValues().length - 1].toString();
+                    mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
+                }
+                mVolumeDefault.setValue(currentDefault);
+                mVolumeDefault.setSummary(mVolumeDefault.getEntry());
+                mVolumeDefault.setOnPreferenceChangeListener(this);
             }
-            mVolumeDefault.setValue(currentDefault);
-            mVolumeDefault.setSummary(mVolumeDefault.getEntry());
-            mVolumeDefault.setOnPreferenceChangeListener(this);
         }
-
-        if (mNavigationPreferencesCat.getPreferenceCount() == 0) {
-            // Hide navigation bar category
-            prefScreen.removePreference(mNavigationPreferencesCat);
-        }
-
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_BLUETOOTH_INPUT_SETTINGS);
 
         mVolumeWakeScreen = (SwitchPreference) findPreference(Settings.System.VOLUME_WAKE_SCREEN);
         mVolumeMusicControls = (SwitchPreference) findPreference(KEY_VOLUME_MUSIC_CONTROLS);
@@ -233,6 +228,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 mVolumeMusicControls.setDependency(Settings.System.VOLUME_WAKE_SCREEN);
                 mVolumeWakeScreen.setDisableDependentsState(true);
             }
+        }
+
+        if (mNavigationPreferencesCat.getPreferenceCount() == 0) {
+            // Hide navigation bar category
+            prefScreen.removePreference(mNavigationPreferencesCat);
         }
     }
 
@@ -476,6 +476,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     private ListPreference initActionList(String key, int value) {
         ListPreference list = (ListPreference) getPreferenceScreen().findPreference(key);
+        if (list == null) return null;
         list.setValue(Integer.toString(value));
         list.setSummary(list.getEntry());
         list.setOnPreferenceChangeListener(this);
@@ -484,6 +485,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     private ListPreference initRecentsLongPressAction(String key) {
         ListPreference list = (ListPreference) getPreferenceScreen().findPreference(key);
+        if (list == null) return null;
         list.setOnPreferenceChangeListener(this);
 
         // Read the componentName from Settings.Secure, this is the user's prefered setting
@@ -804,14 +806,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     ArrayList<String> result = new ArrayList<String>();
-
-                    Intent intent =
-                            new Intent("com.cyanogenmod.action.LAUNCH_BLUETOOTH_INPUT_SETTINGS");
-                    intent.setClassName("com.cyanogenmod.settings.device",
-                            "com.cyanogenmod.settings.device.BluetoothInputSettings");
-                    if (!Utils.doesIntentResolve(context, intent)) {
-                        result.add(KEY_BLUETOOTH_INPUT_SETTINGS);
-                    }
 
                     Map<String, String> items = getPreferencesToRemove(null, context);
                     for (String key : items.keySet()) {
