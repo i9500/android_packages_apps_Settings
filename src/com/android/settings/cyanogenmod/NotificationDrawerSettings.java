@@ -24,9 +24,11 @@ import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
-
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
+import android.os.Vibrator;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.cyanogenmod.qs.QSTiles;
@@ -42,9 +44,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         Preference.OnPreferenceChangeListener {
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "block_on_secure_keyguard";
+    private static final String QS_VIBRATE = "quick_settings_vibrate";
 
     private ListPreference mQuickPulldown;
     private SwitchPreference mBlockOnSecureKeyguard;
+    private SwitchPreference mQsVibrate;
     private Preference mQSTiles;
 
     @Override
@@ -61,6 +65,8 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
 
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
 
         mQuickPulldown.setOnPreferenceChangeListener(this);
@@ -68,6 +74,11 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
                 Settings.System.QS_QUICK_PULLDOWN, 0, UserHandle.USER_CURRENT);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
         updatePulldownSummary(quickPulldownValue);
+
+        mQsVibrate = (SwitchPreference) findPreference(QS_VIBRATE);
+        if (vibrator == null || !vibrator.hasVibrator()) {
+            prefSet.removePreference(mQsVibrate);
+        }
 
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
         mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
