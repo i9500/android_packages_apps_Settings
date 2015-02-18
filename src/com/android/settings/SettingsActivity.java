@@ -91,6 +91,7 @@ import com.android.settings.euphoria.ambientdisplay.AmbientSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.headsup.HeadsUpSettings;
+import com.android.settings.livedisplay.LiveDisplay;
 import com.android.settings.notification.NotificationAppList;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.profiles.NFCProfileTagCallback;
@@ -323,7 +324,8 @@ public class SettingsActivity extends Activity
             DisplayRotation.class.getName(),
             ProfilesSettings.class.getName(),
             ExpandedDesktopPreferenceFragment.class.getName(),
-            AmbientSettings.class.getName()
+            AmbientSettings.class.getName(),
+            LiveDisplay.class.getName()
     };
 
 
