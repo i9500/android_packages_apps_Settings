@@ -35,6 +35,7 @@ import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.preference.SeekBarVolumizer;
 import android.preference.SwitchPreference;
 import android.preference.TwoStatePreference;
@@ -81,7 +82,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String KEY_INCREASING_RING_VOLUME = "increasing_ring_volume";
     private static final String KEY_VIBRATION_INTENSITY = "vibration_intensity";
-
+    private static final String KEY_VIBRATE_ON_TOUCH = "vibrate_on_touch";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -143,7 +144,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         }
 
         if (!VibratorIntensity.isSupported()) {
-            removePreference(KEY_VIBRATION_INTENSITY);
+            vibrate.removePreference(vibrate.findPreference(KEY_VIBRATION_INTENSITY));
         }
 
         initRingtones(sounds);
@@ -168,6 +169,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         super.onPause();
         mVolumeCallback.stopSample();
         mSettingsObserver.register(false);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     // === Volumes ===
@@ -501,6 +507,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
+        private boolean mHasVibratorIntensity;
+
+        @Override
+        public void prepare() {
+            super.prepare();
+            mHasVibratorIntensity = VibratorIntensity.isSupported();
+        }
 
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
@@ -518,6 +531,14 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 rt.add(KEY_PHONE_RINGTONE);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
+            Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            if (vib == null || !vib.hasVibrator()) {
+                rt.add(KEY_VIBRATE);
+            }
+            if (!mHasVibratorIntensity) {
+                rt.add(KEY_VIBRATION_INTENSITY);
+            }
+
             return rt;
         }
     };
