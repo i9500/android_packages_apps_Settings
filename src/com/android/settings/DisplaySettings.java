@@ -158,11 +158,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         PreferenceCategory interfacePrefs = (PreferenceCategory)
                 findPreference(KEY_CATEGORY_INTERFACE);
 
-        if (isAutomaticBrightnessAvailable(getResources())) {
-            mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+        mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+        if (mAutoBrightnessPreference != null && isAutomaticBrightnessAvailable(getResources())) {
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
-            removePreference(KEY_AUTO_BRIGHTNESS);
+            if (displayPrefs != null && mAutoBrightnessPreference != null) {
+                displayPrefs.removePreference(mAutoBrightnessPreference);
+                mAutoBrightnessPreference = null;
+            }
         }
 
         mDozeFragement = (PreferenceScreen) findPreference(KEY_DOZE_FRAGMENT);
@@ -174,11 +177,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
 
-        if (isLiftToWakeAvailable(activity)) {
-            mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);
+        mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);
+        if (mLiftToWakePreference != null && isLiftToWakeAvailable(activity)) {
             mLiftToWakePreference.setOnPreferenceChangeListener(this);
         } else {
-            displayPrefs.removePreference(findPreference(KEY_LIFT_TO_WAKE));
+            if (displayPrefs != null && mLiftToWakePreference != null) {
+                displayPrefs.removePreference(mLiftToWakePreference);
+                mLiftToWakePreference = null;
+            }
         }
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
@@ -227,11 +233,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
-        if (isAutomaticBrightnessAvailable(getResources())) {
-            mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+        mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+        if (mAutoBrightnessPreference != null && isAutomaticBrightnessAvailable(getResources())) {
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
-            removePreference(KEY_AUTO_BRIGHTNESS);
+            if (displayPrefs != null && mAutoBrightnessPreference != null) {
+                displayPrefs.removePreference(mAutoBrightnessPreference);
+                mAutoBrightnessPreference = null;
+            }
         }
 
         mWakeWhenPluggedOrUnplugged =
