@@ -38,6 +38,7 @@ public class NotificationManagerSettings extends SettingsPreferenceFragment
     private static final String TAG = NotificationManagerSettings.class.getSimpleName();
 
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
+    private static final String KEY_HEADS_UP_SETTINGS = "heads_up_enabled";
 
     private boolean mSecure;
     private int mLockscreenSelectedValue;
@@ -88,16 +89,20 @@ public class NotificationManagerSettings extends SettingsPreferenceFragment
             }
         });
 
-        mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
+        mHeadsUp = findPreference(KEY_HEADS_UP_SETTINGS);
+    }
+
+    private boolean getUserHeadsUpState() {
+         return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HEADS_UP_USER_ENABLED,
+                Settings.System.HEADS_UP_USER_ON) != 0;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         
-        boolean headsUpEnabled = Settings.System.getInt(
-                getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 1) != 0;
-        mHeadsUp.setSummary(headsUpEnabled
+        mHeadsUp.setSummary(getUserHeadsUpState()
                 ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
     }
 
