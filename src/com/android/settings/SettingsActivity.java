@@ -89,6 +89,7 @@ import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.euphoria.CustomSettings;
+import com.android.settings.euphoria.ambientdisplay.AmbientSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.headsup.HeadsUpSettings;
@@ -334,7 +335,8 @@ public class SettingsActivity extends Activity
             HeadsUpSettings.class.getName(),
             QSTiles.class.getName(),
             DisplayRotation.class.getName(),
-            ExpandedDesktopPreferenceFragment.class.getName()
+            ExpandedDesktopPreferenceFragment.class.getName(),
+            AmbientSettings.class.getName()
     };
 
 
