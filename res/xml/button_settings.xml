@@ -243,6 +243,11 @@
             android:summary="@string/volbtn_music_controls_summary"
             android:defaultValue="false" />
 
+        <SwitchPreference
+            android:key="swap_volume_buttons"
+            android:title="@string/swap_volume_buttons_title"
+            android:summary="@string/swap_volume_buttons_summary" />
+
         <ListPreference
             android:key="volume_key_cursor_control"
             android:dialogTitle="@string/volbtn_cursor_control_title"
@@ -251,10 +256,14 @@
             android:entryValues="@array/volbtn_cursor_control_values"
             android:persistent="false" />
 
-        <SwitchPreference
-            android:key="swap_volume_buttons"
-            android:title="@string/swap_volume_buttons_title"
-            android:summary="@string/swap_volume_buttons_summary" />
+        <ListPreference
+            android:key="volume_default_screen"
+            android:title="@string/volume_default_title"
+            android:summary="@string/volume_default_summary"
+            android:entries="@array/volume_default_entries"
+            android:entryValues="@array/volume_default_values"
+            android:defaultValue="0" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
