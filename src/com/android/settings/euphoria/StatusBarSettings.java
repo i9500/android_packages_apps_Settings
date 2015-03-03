@@ -35,6 +35,7 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
@@ -157,6 +158,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
         if (!Utils.isVoiceCapable(getActivity())) {
             generalCategory.removePreference(mShowCarrierLabel);
+        }
+
+        if (TelephonyManager.getDefault().getPhoneCount() <= 1) {
+            removePreference(Settings.System.STATUS_BAR_MSIM_SHOW_EMPTY_ICONS);
         }
 
         enableStatusBarClockDependents();
