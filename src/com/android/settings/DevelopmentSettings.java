@@ -69,6 +69,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.cyanogenmod.SecureSettingSwitchPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
@@ -189,6 +190,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
+    public static final String KEY_ADVANCED_MODE = "advanced_mode";
+
+    SecureSettingSwitchPreference mAdvancedSettings;
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
@@ -304,6 +309,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
 
         addPreferencesFromResource(R.xml.development_prefs);
+
+        mAdvancedSettings = (SecureSettingSwitchPreference) findPreference(KEY_ADVANCED_MODE);
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
@@ -560,6 +567,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
         mSwitchBar.show();
         updateKillAppLongpressBackOptions();
+
+        mAdvancedSettings.setChecked(SettingsActivity.showAdvancedPreferences(getActivity()));
     }
 
     @Override
