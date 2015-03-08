@@ -202,9 +202,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 Settings.System.VOLUME_KEYS_DEFAULT);
             boolean linkNotificationWithVolume = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
-            if (!Utils.isVoiceCapable(getActivity())) {
+            if (mVolumeDefault != null && !Utils.isVoiceCapable(getActivity())) {
                 removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_RING));
-            } else if (linkNotificationWithVolume && Utils.isVoiceCapable(getActivity())) {
+            } else if (mVolumeDefault != null && linkNotificationWithVolume
+                    && Utils.isVoiceCapable(getActivity())) {
                 removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_NOTIFICATION));
             }
             if (currentDefault == null) {
@@ -212,9 +213,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     [mVolumeDefault.getEntryValues().length - 1].toString();
                 mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
             }
-            mVolumeDefault.setValue(currentDefault);
-            mVolumeDefault.setSummary(mVolumeDefault.getEntry());
-            mVolumeDefault.setOnPreferenceChangeListener(this);
+            if (mVolumeDefault != null) {
+                mVolumeDefault.setValue(currentDefault);
+                mVolumeDefault.setSummary(mVolumeDefault.getEntry());
+                mVolumeDefault.setOnPreferenceChangeListener(this);
+            }
         }
 
         if (mNavigationPreferencesCat.getPreferenceCount() == 0) {
