@@ -62,10 +62,6 @@
     <string name="status_bar_category">Statusbalk</string>
     <string name="status_bar_show_carrier_title">Toon info-label</string>
 
-    <!-- Status Bar Activity Indicators -->
-    <string name="show_activity_indicators_title">Activity indicators</string>
-    <string name="show_activity_indicators_summary">Show indicators in signal bars</string>
-
     <!--Status bar date -->
     <string name="status_bar_clock_category">Clock</string>
     <string name="status_bar_date_title">Datum stijl</string>
@@ -112,40 +108,6 @@
     <string name="touch_control_settings_title">Aanraak controle</string>
     <string name="touch_control_settings_summary">Beheer geavanceerde ontwaakopties, waaronder dubbele tik om te onwaken en meer</string>
 
-    <!-- Status bar | Clock -->
-    <string name="status_bar_clock_category">Statusbalk</string>
-    <string name="status_bar_clock">Tijd en datum</string>
-    <string name="status_bar_clock_title">Tijd en datum stijl</string>
-    <string name="clock_title_enable">Uitlijning</string>
-    <string name="clock_enabled">Ingeschakeld</string>
-    <string name="clock_disabled">Uitgeschakeld</string>
-    <string name="status_bar_show_clock_title">Tijd en datum weergeven</string>
-    <string name="status_bar_am_pm_title">AM/PM</string>
-    <string name="status_bar_am_pm_info">24-uurs klok ingeschakeld</string>
-    <string name="enable_clock_weekday">Dag van de week</string>
-    <string name="enable_clock_weekday_summary">Afgekorte dag van de week voor het tijdstip</string>
-    <string name="right_clock">Tijd rechts</string>
-    <string name="center_clock">Tijd gecentreerd</string>
-    <string name="dont_show">Niet weergeven</string>
-    <string name="clock_date_display">Datum</string>
-    <string name="clock_date_display_summary">Aangepaste datum voor de tijd weergeven</string>
-    <string name="clock_date_style">Datum stijl</string>
-    <string name="clock_date_format">Date formatering</string>
-    <string name="clock_date_string_edittext_title">Moet in DateFormat bv. dd/MM/yy</string>
-    <string name="clock_date_string_edittext_summary">Voer tekst in</string>
-    <string name="am_pm_clock_normal">Normale lettergrootte</string>
-    <string name="am_pm_clock_small">Kleine lettergrootte</string>
-    <string name="am_pm_clock_none">Niet weergeven</string>
-    <string name="clock_date_display_none">Niet weergeven</string>
-    <string name="clock_date_display_small">Kleine lettergrootte</string>
-    <string name="clock_date_display_normal">Normale lettergrootte</string>
-    <string name="clock_date_style_normal">Normaal</string>
-    <string name="clock_date_style_lowercase">Kleine letters</string>
-    <string name="clock_date_style_uppercase">Hoofdletters</string>
-    <string name="clock_date_format_custom">Aangepast java-formaat</string>
-    <string name="status_bar_ticker_title">Melding Ticker</string>
-    <string name="status_bar_ticker_summary">Animatie van de meldingstekst in de statusbalk</string>
-
     <!-- Quick settings -->
     <string name="quick_settings_category">Snelle instellingen</string>
     <string name="block_on_secure_keyguard_title">Uitschakelen bij schermvergrendeling</string>
@@ -153,10 +115,6 @@
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
-
-    <!-- Unaccounted and overcounted battery stats -->
-    <string name="show_unac_and_overcounted_stats_title">Batterij statistieken</string>
-    <string name="show_unac_and_overcounted_stats_summary">Batterij gebruiksstatistieken weergeven</string>
 
     <!-- Keyguard notifications -->
     <string name="app_notification_show_on_keyguard_title">Weergeven bij schermvergrendeling</string>
@@ -219,13 +177,6 @@
     <string name="navigation_bar_size_40_dp">40 dp</string>
     <string name="navigation_bar_size_42_dp">42 dp</string>
     <string name="navigation_bar_size_0_dp">0 dp (uit)</string>
-
-    <!-- Wifi connection notifications -->
-    <string name="wifi_notify_changed_networks">Wi\u2011Fi meldingen</string>
-    <string name="notify_changed_networks_default">Uit (standaard)</string>
-    <string name="notify_changed_networks_toast">Toast</string>
-    <string name="notify_changed_networks_notification">Meldingen</string>
-    <string name="notify_changed_networks_notification_sound">Meldingen met geluid</string>
 
     <!-- Heads Up -->
     <string name="category_heads_up">Info meldingen</string>

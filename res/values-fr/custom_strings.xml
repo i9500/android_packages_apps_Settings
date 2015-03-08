@@ -69,10 +69,6 @@
     <string name="show_carrier_statusbar">Opérateur sur la barre de statut</string>
     <string name="show_carrier_enabled">Activé</string>
 
-    <!-- Status Bar Activity Indicators -->
-    <string name="show_activity_indicators_title">Indicateurs d\'activités</string>
-    <string name="show_activity_indicators_summary">Afficher les indicateurs dans les barres de signal</string>
-
     <!--Status bar date -->
     <string name="status_bar_clock_category">Clock</string>
     <string name="status_bar_date_title">Style de la date</string>
@@ -119,40 +115,6 @@
     <string name="touch_control_settings_title">Contrôle tactile</string>
     <string name="touch_control_settings_summary">Gérer les options avancées de réveil, y compris le taper deux fois pour réveiller et plus</string>
 
-    <!-- Status bar | Clock -->
-    <string name="status_bar_clock_category">Barre de statut</string>
-    <string name="status_bar_clock">Heure et date</string>
-    <string name="status_bar_clock_title">Style de l\'heure et de la date</string>
-    <string name="clock_title_enable">Alignement</string>
-    <string name="clock_enabled">Activée</string>
-    <string name="clock_disabled">Désactivée</string>
-    <string name="status_bar_show_clock_title">Afficher l\'heure et la date</string>
-    <string name="status_bar_am_pm_title">AM/PM</string>
-    <string name="status_bar_am_pm_info">L\'horloge 24H est activée</string>
-    <string name="enable_clock_weekday">Jour de la semaine</string>
-    <string name="enable_clock_weekday_summary">Jour de la semaine abrégé devant l\'heure</string>
-    <string name="right_clock">Horloge à droite</string>
-    <string name="center_clock">Horloge au centre</string>
-    <string name="dont_show">Ne pas montrer</string>
-    <string name="clock_date_display">Date</string>
-    <string name="clock_date_display_summary">Afficher la date personnalisée avant l\'horloge.</string>
-    <string name="clock_date_style">Style de la date</string>
-    <string name="clock_date_format">Format de la date</string>
-    <string name="clock_date_string_edittext_title">Doit être en format date par exemple. dd/MM/yy</string>
-    <string name="clock_date_string_edittext_summary">Entrer la valeur</string>
-    <string name="am_pm_clock_normal">Taille de police normale</string>
-    <string name="am_pm_clock_small">Taille de police petite</string>
-    <string name="am_pm_clock_none">Ne pas montrer</string>
-    <string name="clock_date_display_none">Ne pas montrer</string>
-    <string name="clock_date_display_small">Taille de police petite</string>
-    <string name="clock_date_display_normal">Taille de police normale</string>
-    <string name="clock_date_style_normal">Normal</string>
-    <string name="clock_date_style_lowercase">Minuscule</string>
-    <string name="clock_date_style_uppercase">Majuscule</string>
-    <string name="clock_date_format_custom">Format personnalisé</string>
-    <string name="status_bar_ticker_title">Notifications animées</string>
-    <string name="status_bar_ticker_summary">Animation du texte des notifications dans la barre d\'état</string>
-
     <!-- Quick settings -->
     <string name="quick_settings_category">Paramètres rapides</string>
     <string name="block_on_secure_keyguard_title">Désactiver sur l\'écran de verrouillage</string>
@@ -172,10 +134,6 @@
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
-
-    <!-- Unaccounted and overcounted battery stats -->
-    <string name="show_unac_and_overcounted_stats_title">Montrer les statistiques ignorées et surpassées</string>
-    <string name="show_unac_and_overcounted_stats_summary">Afficher les statistiques de la batterie ignorées et l\'utilisation surpassée</string>
 
     <!-- Keyguard notifications -->
     <string name="app_notification_show_on_keyguard_title">Afficher sur l\'écran de verrouillage</string>
@@ -243,13 +201,6 @@
     <string name="navigation_bar_size_40_dp">40 dp</string>
     <string name="navigation_bar_size_42_dp">42 dp</string>
     <string name="navigation_bar_size_0_dp">0 dp (Cacher)</string>
-
-    <!-- Wifi connection notifications -->
-    <string name="wifi_notify_changed_networks">Wi\u2011Fi notification connectée</string>
-    <string name="notify_changed_networks_default">Arrêt (Par défaut)</string>
-    <string name="notify_changed_networks_toast">Toast</string>
-    <string name="notify_changed_networks_notification">Notification</string>
-    <string name="notify_changed_networks_notification_sound">Notification avec son</string>
 
     <!-- Heads Up -->
     <string name="category_heads_up">Notifications flottantes</string>
