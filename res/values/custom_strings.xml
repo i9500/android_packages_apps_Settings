@@ -123,6 +123,10 @@
     <string name="smart_pulldown_persistent">No persistent</string>
     <string name="smart_pulldown_all">No dismissable or persistent</string>
 
+    <!-- Force expand notifications -->
+    <string name="notification_force_expand_title">Force expanded notification</string>
+    <string name="notification_force_expand_summary">Force expanded notifications on all apps that support it</string>
+
     <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
     <string name="show_cpu_info">Show CPU info</string>
     <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
