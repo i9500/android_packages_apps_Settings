@@ -43,10 +43,12 @@ import com.android.internal.widget.LockPatternUtils;
 public class NotificationDrawerSettings extends SettingsPreferenceFragment implements Indexable,
         Preference.OnPreferenceChangeListener {
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String SMART_PULLDOWN = "smart_pulldown";
     private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "block_on_secure_keyguard";
     private static final String QS_VIBRATE = "quick_settings_vibrate";
 
     private ListPreference mQuickPulldown;
+    private ListPreference mSmartPulldown;
     private SwitchPreference mBlockOnSecureKeyguard;
     private SwitchPreference mQsVibrate;
     private Preference mQSTiles;
@@ -68,12 +70,18 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
-
         mQuickPulldown.setOnPreferenceChangeListener(this);
         int quickPulldownValue = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_QUICK_PULLDOWN, 0, UserHandle.USER_CURRENT);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
-        updatePulldownSummary(quickPulldownValue);
+        mQuickPulldown.setSummary(mQuickPulldown.getEntry());
+
+        mSmartPulldown = (ListPreference) prefSet.findPreference(SMART_PULLDOWN);
+        mSmartPulldown.setOnPreferenceChangeListener(this);
+        int smartPulldownValue = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_SMART_PULLDOWN, 0, UserHandle.USER_CURRENT);
+        mSmartPulldown.setValue(String.valueOf(smartPulldownValue));
+        mSmartPulldown.setSummary(mSmartPulldown.getEntry());
 
         mQsVibrate = (SwitchPreference) findPreference(QS_VIBRATE);
         if (vibrator == null || !vibrator.hasVibrator()) {
@@ -101,26 +109,20 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         ContentResolver resolver = getContentResolver();
         if (preference == mQuickPulldown) {
             int quickPulldownValue = Integer.valueOf((String) newValue);
+            int index = mQuickPulldown.findIndexOfValue((String) newValue);
             Settings.System.putIntForUser(resolver, Settings.System.QS_QUICK_PULLDOWN,
                     quickPulldownValue, UserHandle.USER_CURRENT);
-            updatePulldownSummary(quickPulldownValue);
+            mQuickPulldown.setSummary(mQuickPulldown.getEntries()[index]);
+            return true;
+        } else if (preference == mSmartPulldown) {
+            int smartPulldownValue = Integer.valueOf((String) newValue);
+            int index = mSmartPulldown.findIndexOfValue((String) newValue);
+            Settings.System.putIntForUser(resolver, Settings.System.QS_SMART_PULLDOWN,
+                    smartPulldownValue, UserHandle.USER_CURRENT);
+            mSmartPulldown.setSummary(mSmartPulldown.getEntries()[index]);
             return true;
         }
         return false;
-    }
-
-    private void updatePulldownSummary(int value) {
-        Resources res = getResources();
-
-        if (value == 0) {
-            // quick pulldown deactivated
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
-        } else {
-            String direction = res.getString(value == 2
-                    ? R.string.quick_pulldown_summary_left
-                    : R.string.quick_pulldown_summary_right);
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary, direction));
-        }
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
