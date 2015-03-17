@@ -78,6 +78,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
     private static final String KEY_NAVIGATION_RECENTS_LONG_PRESS = "navigation_recents_long_press";
     private static final String KEY_POWER_END_CALL = "power_end_call";
+    private static final String KEY_POWER_MENU = "power_menu";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
 
     private static final String CATEGORY_POWER = "power_key";
@@ -131,6 +132,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mNavigationBarLeftPref;
     private ListPreference mNavigationRecentsLongPressAction;
     private SwitchPreference mPowerEndCall;
+    private Preference mPowerMenu;
     private SwitchPreference mHomeAnswerCall;
 
     private PreferenceCategory mNavigationPreferencesCat;
@@ -147,6 +149,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         // Power button ends calls.
         mPowerEndCall = (SwitchPreference) findPreference(KEY_POWER_END_CALL);
+        mPowerMenu = (Preference) findPreference(KEY_POWER_MENU);
 
         // Home button answers calls.
         mHomeAnswerCall = (SwitchPreference) findPreference(KEY_HOME_ANSWER_CALL);
@@ -209,12 +212,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     && Utils.isVoiceCapable(getActivity())) {
                 removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_NOTIFICATION));
             }
-            if (currentDefault == null) {
-                currentDefault = mVolumeDefault.getEntryValues()
-                    [mVolumeDefault.getEntryValues().length - 1].toString();
-                mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
-            }
             if (mVolumeDefault != null) {
+                if (currentDefault == null) {
+                    currentDefault = mVolumeDefault.getEntryValues()
+                        [mVolumeDefault.getEntryValues().length - 1].toString();
+                    mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
+                }
                 mVolumeDefault.setValue(currentDefault);
                 mVolumeDefault.setSummary(mVolumeDefault.getEntry());
                 mVolumeDefault.setOnPreferenceChangeListener(this);
@@ -234,6 +237,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         if (mNavigationPreferencesCat.getPreferenceCount() == 0) {
             // Hide navigation bar category
             prefScreen.removePreference(mNavigationPreferencesCat);
+        }
+
+        final PreferenceCategory powerCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER);
+        if (mPowerEndCall == null && mPowerMenu == null) {
+            prefScreen.removePreference(powerCategory);
         }
     }
 
