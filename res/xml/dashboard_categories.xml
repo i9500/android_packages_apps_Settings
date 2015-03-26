@@ -128,18 +128,6 @@
                 android:icon="@drawable/ic_settings_display"
                 />
 
-        <!-- Themes -->
-        <!-- NOTE: Intent.parseIntent looks for "categories" tag and not "category" -->
-        <dashboard-tile
-                android:id="@+id/theme_settings"
-                android:title="@string/themes_settings_title"
-                android:icon="@drawable/ic_settings_themes">
-            <intent
-                    android:action="android.intent.action.MAIN" >
-                <categories android:name="cyanogenmod.intent.category.APP_THEMES" />
-            </intent>
-        </dashboard-tile>
-
         <!-- Notification manager -->
         <dashboard-tile
                 android:id="@+id/notification_manager"
@@ -161,7 +149,7 @@
                 android:id="@+id/button_settings"
                 android:title="@string/button_pref_title"
                 android:fragment="com.android.settings.ButtonSettings"
-                android:icon="@drawable/ic_settings_buttons"
+                android:icon="@drawable/ic_bt_misc_hid"
                 />
 
         <!-- O-Click -->
@@ -223,6 +211,18 @@
                 android:fragment="com.android.settings.HomeSettings"
                 android:icon="@drawable/ic_settings_home"
                 />
+
+        <!-- Themes -->
+        <!-- NOTE: Intent.parseIntent looks for "categories" tag and not "category" -->
+        <dashboard-tile
+                android:id="@+id/theme_settings"
+                android:title="@string/themes_settings_title"
+                android:icon="@drawable/ic_settings_themes">
+            <intent
+                    android:action="android.intent.action.MAIN" >
+                <categories android:name="cyanogenmod.intent.category.APP_THEMES" />
+            </intent>
+        </dashboard-tile>
 
         <!-- Profiles -->
         <dashboard-tile
@@ -289,6 +289,7 @@
                 android:title="@string/radio_controls_title"
                 android:fragment="com.android.settings.euphoria.CustomSettings"
                 android:icon="@drawable/ic_settings_more"
+                settings:advanced="true"
                 />
 
     </dashboard-category>
@@ -355,14 +356,6 @@
                 settings:advanced="true"
                 />
 
-        <!-- Development -->
-        <dashboard-tile
-                android:id="@+id/development_settings"
-                android:title="@string/development_settings_title"
-                android:fragment="com.android.settings.DevelopmentSettings"
-                android:icon="@drawable/ic_settings_development"
-                />
-
         <!-- SuperSU -->
         <dashboard-tile
                 android:id="@+id/supersu_settings"
@@ -373,6 +366,14 @@
                     android:targetPackage="eu.chainfire.supersu"
                     android:targetClass="eu.chainfire.supersu.MainActivity" />
         </dashboard-tile>
+
+        <!-- Development -->
+        <dashboard-tile
+                android:id="@+id/development_settings"
+                android:title="@string/development_settings_title"
+                android:fragment="com.android.settings.DevelopmentSettings"
+                android:icon="@drawable/ic_settings_development"
+                />
 
         <!-- About Device -->
         <dashboard-tile

@@ -21,7 +21,7 @@
 
     <!-- Updater -->
     <string name="updater_title">Updates</string>
-    <string name="updater_summary">Check for updates and more</string>
+    <string name="updater_summary">Check for updates</string>
 
     <!-- About phone screen,  Mod Version -->
     <string name="mod_version_eos">Euphoria version</string>
@@ -35,12 +35,25 @@
     <string name="mem_info">Memory</string>
     <!-- About phone screen, status item label -->
 
+    <!-- Advanced category -->
+    <string name="advanced_options_title">Advanced</string>
+
+    <!-- General category -->
+    <string name="general_options_title">General</string>
+
     <!--Back to kill timeout -->
     <string name="long_press_kill_delay">App kill delay</string>
 
     <!--Status bar data and wifi activity -->
     <string name="show_activity_indicators_title">Activity indicators</string>
     <string name="show_activity_indicators_summary">Show indicators in signal bars</string>
+
+    <!--Status bar carrier -->
+    <string name="show_carrier_title">Carrier label</string>
+    <string name="show_carrier_disabled">Disabled</string>
+    <string name="show_carrier_keyguard">Keyguard carrier</string>
+    <string name="show_carrier_statusbar">Status bar carrier</string>
+    <string name="show_carrier_enabled">Enabled</string>
 
     <!--Status bar date -->
     <string name="status_bar_clock_category">Clock</string>
@@ -57,12 +70,11 @@
     <string name="status_bar_date_string_edittext_title">Must be in DateFormat eg. MM/dd/yy</string>
     <string name="status_bar_date_string_edittext_summary">Enter string</string>
 
-    <!--Status bar carrier -->
-    <string name="show_carrier_title">Carrier label</string>
-    <string name="show_carrier_disabled">Disabled</string>
-    <string name="show_carrier_keyguard">Keyguard carrier</string>
-    <string name="show_carrier_statusbar">Status bar carrier</string>
-    <string name="show_carrier_enabled">Enabled</string>
+     <!-- Weather in status bar header -->
+    <string name="status_bar_show_weather_title_eos">Weather</string>
+
+    <!-- Notification count -->
+    <string name="status_bar_notif_count_title_eos">Notification count</string>
 
     <!-- Network traffic -->
     <string name="network_traffic_title">Network traffic</string>
@@ -107,22 +119,26 @@
     <string name="qs_screenshot_tile">Screenshot</string>
     <string name="qs_sync_tile">Sync</string>
 
-    <!-- QuickSettings block on keyguard -->
+    <!-- Quick Settings block on keyguard -->
     <string name="block_on_secure_keyguard_title">Disable on lock screen</string>
     <string name="block_on_secure_keyguard_summary">Disable quick settings on secure lock screen</string>
 
-    <!-- QuickSettings haptic feedback -->
+    <!-- Quick Settings haptic feedback -->
     <string name="quick_settings_vibrate_title">Vibrate on touch</string>
     <string name="quick_settings_vibrate_summary">Vibrate when touching tiles</string>
 
-    <!-- QuickSettings collapse panel -->
+    <!-- Quick Settings collapse panel -->
     <string name="quick_settings_collapse_title">Auto close panel</string>
-    <string name="quick_settings_collapse_summary">Close the Quick Settings panel upon toggle</string>
+    <string name="quick_settings_collapse_summary">Close the quick settings panel upon toggle</string>
 
-    <!-- QuickSettings 4 columns -->
+    <!-- Quick Settings brightness slider -->
+    <string name="qs_brightness_slider_title_eos">Brightness slider</string>
+    <string name="qs_brightness_slider_summary">Show a brightness slider in the quick settings panel</string>
+
+    <!-- Quick Settings 4 columns -->
     <string name="qs_four_columns_title">Show four tiles per row</string>
 
-    <!-- QuickSettings: Smart Pulldown -->
+    <!-- Quick Settings: Smart Pulldown -->
     <string name="smart_pulldown_title">Smart pulldown</string>
     <string name="smart_pulldown_summary">Open quick settings when there are %1$s notifications present</string>
     <string name="smart_pulldown_off">Off</string>
@@ -157,6 +173,11 @@
     <!-- Battery saver color -->
     <string name="battery_saver_color_title">Warning color</string>
     <string name="battery_saver_color_summary">Enable orange status and navigation bars when battery saver is activated</string>
+
+    <!--- Lock clock -->
+    <string name="weather_options_title">Weather</string>
+    <string name="lock_clock_title">Clock and weather widget</string>
+    <string name="lock_clock_summary">View or change how the clock and weather widget will display</string>
 
     <!-- Recents panel -->
     <string name="recents_panel_category">Recents panel</string>
@@ -201,7 +222,7 @@
     <string name="category_heads_up">Heads up notifications</string>
     <string name="summary_heads_up_enabled">Pop-up notifications are enabled</string>
     <string name="summary_heads_up_disabled">Pop-up notifications are disabled</string>
-    <string name="show_headsup_button_title">Show quick access button</string>
+    <string name="show_headsup_button_title">Quick access button</string>
     <string name="show_headsup_button_summary">Show a quick access button in the status bar header</string>
     <string name="add_heads_up_package">Add app</string>
     <string name="add_heads_up_dnd_summary">Don\'t show heads up in these applications</string>
@@ -416,8 +437,5 @@
     <string name="volume_default_media">Media</string>
     <string name="volume_default_title">Volume default</string>
     <string name="volume_default_summary">Choose which volume gets changed by default</string>
-
-    <!-- Advanced mode summary -->
-    <string name="advanced_mode_summary">Enable advanced settings</string>
 
 </resources>

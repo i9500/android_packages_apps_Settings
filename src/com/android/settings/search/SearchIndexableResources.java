@@ -37,6 +37,7 @@ import com.android.settings.cyanogenmod.StatusBarSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.euphoria.ambientdisplay.AmbientSettings;
+import com.android.settings.euphoria.CustomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -288,7 +289,7 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(ButtonSettings.class.getName()),
                         R.xml.button_settings,
                         ButtonSettings.class.getName(),
-                        R.drawable.ic_settings_buttons));
+                        R.drawable.ic_bt_misc_hid));
 
         sResMap.put(StatusBarSettings.class.getName(),
                 new SearchIndexableResource(
@@ -318,6 +319,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         AmbientSettings.class.getName(),
                         R.drawable.ic_settings_display));
+
+        sResMap.put(CustomSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(CustomSettings.class.getName()),
+                        R.xml.custom_settings,
+                        CustomSettings.class.getName(),
+                        R.drawable.ic_settings_more));
     }
 
     private SearchIndexableResources() {

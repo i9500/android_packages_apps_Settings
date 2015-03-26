@@ -15,6 +15,7 @@
 */
 package com.android.settings.euphoria;
 
+import android.content.Context;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -28,12 +29,20 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 
+import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomSettings extends SettingsPreferenceFragment
-            implements OnPreferenceChangeListener  {
+            implements OnPreferenceChangeListener, Indexable  {
 
     private static final String SHOW_CLEAR_ALL_RECENTS = "show_clear_all_recents";
     private static final String RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
@@ -84,4 +93,25 @@ public class CustomSettings extends SettingsPreferenceFragment
         }
         return false;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                                                                            boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.custom_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    return new ArrayList<String>();
+                }
+            };
 }

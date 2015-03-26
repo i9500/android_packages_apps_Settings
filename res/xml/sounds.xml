@@ -33,13 +33,13 @@
         <!-- Media volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="media_volume"
-                android:icon="@drawable/ic_audio_vol_24dp"
+                android:icon="@*android:drawable/ic_audio_vol"
                 android:title="@string/media_volume_option_title" />
 
         <!-- Alarm volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="alarm_volume"
-                android:icon="@drawable/ic_audio_alarm_24dp"
+                android:icon="@*android:drawable/ic_audio_alarm"
                 android:title="@string/alarm_volume_option_title" />
 
         <!-- Link Volume Notification -->
@@ -51,7 +51,7 @@
         <!-- Notification volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="notification_volume"
-                android:icon="@drawable/ring_notif"
+                android:icon="@*android:drawable/ic_audio_ring_notif"
                 android:title="@string/notification_volume_option_title"
                 settings:advanced="true"/>
 
@@ -77,13 +77,6 @@
                 android:persistent="false"
                 android:ringtoneType="notification" />
 
-        <!-- Interruptions -->
-        <PreferenceScreen
-                android:key="zen_mode"
-                android:title="@string/zen_mode_settings_title"
-                settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
-                android:fragment="com.android.settings.notification.ZenModeSettings" />
-
         <!-- Increasing ring -->
         <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
                 android:key="increasing_ring"
@@ -96,19 +89,19 @@
                 android:dependency="increasing_ring"
                 settings:advanced="true"/>
 
-        <!-- Headset -->
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-                android:key="headset_connect_player"
-                android:title="@string/headset_connect_player_title"
-                android:summary="@string/headset_connect_player_summary"
-                android:defaultValue="false" />
-
         <!-- Other sounds -->
         <Preference
                 android:key="other_sounds"
                 android:title="@string/other_sound_settings"
                 android:persistent="false"
                 android:fragment="com.android.settings.notification.OtherSoundSettings" />
+
+        <!-- Headset -->
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+                android:key="headset_connect_player"
+                android:title="@string/headset_connect_player_title"
+                android:summary="@string/headset_connect_player_summary"
+                android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -136,3 +129,4 @@
                 settings:advanced="true"/>
     </PreferenceCategory>
 </PreferenceScreen>
+

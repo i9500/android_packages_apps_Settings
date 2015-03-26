@@ -44,6 +44,12 @@
                 android:summary="@string/live_display_summary"
                 android:fragment="com.android.settings.livedisplay.LiveDisplay" />
 
+        <!-- Doze // Ambient display -->
+        <PreferenceScreen
+                android:key="doze_fragment"
+                android:title="@string/doze_title"
+                android:fragment="com.android.settings.euphoria.ambientdisplay.AmbientSettings" />
+
         <!-- Rotation modes -->
         <PreferenceScreen
                 android:key="display_rotation"
@@ -57,11 +63,14 @@
                 android:title="@string/accelerometer_title"
                 settings:advanced="false"/>
 
-        <!-- Doze // Ambient display -->
-        <PreferenceScreen
-                android:key="doze_fragment"
-                android:title="@string/doze_title"
-                android:fragment="com.android.settings.euphoria.ambientdisplay.AmbientSettings" />
+        <!-- Seconds before sleep -->
+        <ListPreference
+                android:key="screen_timeout"
+                android:title="@string/screen_timeout"
+                android:summary="@string/screen_timeout_summary"
+                android:persistent="false"
+                android:entries="@array/screen_timeout_entries"
+                android:entryValues="@array/screen_timeout_values" />
 
         <!-- Lift to wake -->
         <SwitchPreference
@@ -90,15 +99,6 @@
                 android:defaultValue="true"
                 settings:advanced="true"/>
 
-        <!-- Seconds before sleep -->
-        <ListPreference
-                android:key="screen_timeout"
-                android:title="@string/screen_timeout"
-                android:summary="@string/screen_timeout_summary"
-                android:persistent="false"
-                android:entries="@array/screen_timeout_entries"
-                android:entryValues="@array/screen_timeout_values" />
-
         <!-- Wake on plug -->
         <SwitchPreference
                 android:key="wake_when_plugged_or_unplugged"
@@ -118,13 +118,15 @@
         <PreferenceScreen
                 android:key="screen_recorder"
                 android:title="@string/screen_recorder_title"
-                android:fragment="com.android.settings.euphoria.ScreenRecorderSettings" />
+                android:fragment="com.android.settings.euphoria.ScreenRecorderSettings"
+                settings:advanced="true"/>
 
         <!-- Animations -->
         <PreferenceScreen
                 android:key="animation_settings"
                 android:title="@string/animation_title"
-                android:fragment="com.android.settings.euphoria.animation.AnimationSettings" />
+                android:fragment="com.android.settings.euphoria.animation.AnimationSettings"
+                settings:advanced="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -137,17 +139,12 @@
                 android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment"
                 settings:advanced="true"/>
 
-        <!-- Day dream -->
-        <PreferenceScreen
-                android:key="screensaver"
-                android:title="@string/screensaver_settings_title"
-                android:fragment="com.android.settings.DreamSettings" />
-
         <!-- LCD density -->
         <ListPreference
                 android:key="lcd_density"
                 android:title="@string/lcd_density"
-                android:persistent="false" />
+                android:persistent="false"
+                settings:advanced="true"/>
 
         <!-- Font size -->
         <com.android.settings.FontDialogPreference
@@ -157,14 +154,11 @@
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
-        <!-- Search in Recents -->
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-                android:key="recents_show_search_bar"
-                android:title="@string/recents_show_searchbar"
-                settings:keywords="@string/keywords_recents_show_searchbar"
-                android:defaultValue="true"
-                settings:advanced="true" />
-
+        <!-- Day dream -->
+        <PreferenceScreen
+                android:key="screensaver"
+                android:title="@string/screensaver_settings_title"
+                android:fragment="com.android.settings.DreamSettings" />
     </PreferenceCategory>
 
     <PreferenceCategory

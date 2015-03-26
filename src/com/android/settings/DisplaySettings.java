@@ -186,13 +186,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 currentIndex = idx;
             }
         }
-        mLcdDensityPreference.setEntries(densityEntries);
-        mLcdDensityPreference.setEntryValues(densityEntries);
-        if (currentIndex != -1) {
-            mLcdDensityPreference.setValueIndex(currentIndex);
+        if (mLcdDensityPreference != null) {
+            mLcdDensityPreference.setEntries(densityEntries);
+            mLcdDensityPreference.setEntryValues(densityEntries);
+            if (currentIndex != -1) {
+                mLcdDensityPreference.setValueIndex(currentIndex);
+            }
+            mLcdDensityPreference.setOnPreferenceChangeListener(this);
+            updateLcdDensityPreferenceDescription(currentDensity);
         }
-        mLcdDensityPreference.setOnPreferenceChangeListener(this);
-        updateLcdDensityPreferenceDescription(currentDensity);
 
         mFontSizePref = (FontDialogPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
