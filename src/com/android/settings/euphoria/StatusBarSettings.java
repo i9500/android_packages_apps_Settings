@@ -68,6 +68,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 6;
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String SHOW_CARRIER_LABEL = "status_bar_show_carrier";
+    private static final String SHOW_EMPTY_SIMS = "status_bar_show_empty_sims";
 
     private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCK_CLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
@@ -84,6 +85,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private ListPreference mStatusBarBatteryShowPercent;
     private ListPreference mStatusBarBattery;
     private ListPreference mShowCarrierLabel;
+    private SwitchPreference mShowEmptySims;
     private PreferenceScreen mLockClock;
 
     @Override
@@ -107,6 +109,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY_STYLE);
         mStatusBarBatteryShowPercent =
                 (ListPreference) findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
+        mShowCarrierLabel =
+                (ListPreference) findPreference(SHOW_CARRIER_LABEL);
+        mShowEmptySims = (SwitchPreference) findPreference(SHOW_EMPTY_SIMS);
+        mLockClock = (PreferenceScreen) findPreference(KEY_LOCK_CLOCK);
 
         int clockStyle = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CLOCK, 1);
@@ -156,8 +162,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         enableStatusBarBatteryDependents(batteryStyle);
         mStatusBarBatteryShowPercent.setOnPreferenceChangeListener(this);
 
-        mShowCarrierLabel =
-                (ListPreference) findPreference(SHOW_CARRIER_LABEL);
         int showCarrierLabel = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_SHOW_CARRIER, 1);
         mShowCarrierLabel.setValue(String.valueOf(showCarrierLabel));
         mShowCarrierLabel.setSummary(mShowCarrierLabel.getEntry());
@@ -168,10 +172,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         }
 
         if (TelephonyManager.getDefault().getPhoneCount() <= 1) {
-            removePreference(Settings.System.STATUS_BAR_MSIM_SHOW_EMPTY_ICONS);
+            generalCategory.removePreference(mShowEmptySims);
         }
 
-        mLockClock = (PreferenceScreen) findPreference(KEY_LOCK_CLOCK);
         if (!Utils.isPackageInstalled(getActivity(), KEY_LOCK_CLOCK_PACKAGE_NAME)) {
             weatherCategory.removePreference(mLockClock);
         }
