@@ -44,7 +44,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         Preference.OnPreferenceChangeListener {
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String SMART_PULLDOWN = "smart_pulldown";
-    private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "block_on_secure_keyguard";
+    private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "status_bar_locked_on_secure_keyguard";
     private static final String QS_VIBRATE = "quick_settings_vibrate";
 
     private ListPreference mQuickPulldown;
