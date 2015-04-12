@@ -37,6 +37,7 @@ import android.net.NetworkUtils;
 import android.net.wifi.IWifiManager;
 import android.net.wifi.WifiInfo;
 import android.hardware.usb.IUsbManager;
+import android.hardware.usb.UsbManager;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
@@ -50,7 +51,6 @@ import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.hardware.usb.UsbManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -721,6 +721,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         resetAdbNotifyOptions();
         resetVerifyAppsOverUsbOptions();
         resetDevelopmentShortcutOptions();
+        resetUseNuplayerOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -781,6 +782,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void resetAdbNotifyOptions() {
         Settings.Secure.putInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_NOTIFY, 1);
+    }
+
+    private void resetUseNuplayerOptions() {
+        SystemProperties.set(USE_AWESOMEPLAYER_PROPERTY, "0");
     }
 
     private void updateHdcpValues() {

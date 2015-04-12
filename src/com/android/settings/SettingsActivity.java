@@ -80,6 +80,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.blacklist.BlacklistSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.cyanogenmod.DisplayRotation;
+import com.android.settings.cyanogenmod.NotificationDrawerSettings;
 import com.android.settings.cyanogenmod.qs.QSTiles;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
@@ -238,11 +239,11 @@ public class SettingsActivity extends Activity
             R.id.sim_settings,
             R.id.wireless_settings,
             R.id.device_section,
+            R.id.button_settings,
             R.id.sound_settings,
             R.id.display_and_lights_settings,
             R.id.lockscreen_settings,
             R.id.notification_manager,
-            R.id.button_settings,
             R.id.storage_settings,
             R.id.application_settings,
             R.id.battery_settings,
@@ -258,10 +259,13 @@ public class SettingsActivity extends Activity
             R.id.accessibility_settings,
             R.id.print_settings,
             R.id.home_settings,
-            R.id.status_bar_settings,
             R.id.dashboard,
             R.id.privacy_settings_cyanogenmod,
-            R.id.custom_settings
+            R.id.custom_settings,
+            R.id.status_bar_settings,
+            R.id.notification_drawer_settings,
+            R.id.theme_settings,
+            R.id.profile_settings
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -338,7 +342,6 @@ public class SettingsActivity extends Activity
             AmbientSettings.class.getName(),
             DisplayRotation.class.getName()
     };
-
 
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"

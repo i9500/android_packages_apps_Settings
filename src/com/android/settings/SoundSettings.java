@@ -115,8 +115,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private Preference mNotificationRingtonePreference;
     private TwoStatePreference mVibrateWhenRinging;
     private Preference mNotificationAccess;
-    private boolean mSecure;
-    private int mLockscreenSelectedValue;
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
     private SwitchPreference mVolumeLinkNotificationSwitch;
@@ -222,7 +220,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                 ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
                 : mRingerMode == AudioManager.RINGER_MODE_VIBRATE
                 ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
-                : com.android.internal.R.drawable.ic_audio_ring_notif);
+                : R.drawable.ic_audio_ring_24dp);
     }
 
     private void updateRingerMode() {
