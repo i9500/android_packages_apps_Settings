@@ -46,6 +46,12 @@
             android:summary="@string/navigation_bar_arrow_keys_summary"
             android:defaultValue="false" />
 
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="double_tap_sleep_navbar"
+            android:title="@string/double_tap_sleep_nav_bar_title"
+            android:summary="@string/double_tap_sleep_nav_bar_summary"
+            android:defaultValue="false" />
+
         <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.cyanogenmod.NavBar"
@@ -57,12 +63,6 @@
             android:fragment="com.android.settings.euphoria.NavBarDimen"
             android:title="@string/navbar_dimen_title"
             settings:advanced="true"/>
-
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-            android:key="double_tap_sleep_navbar"
-            android:title="@string/double_tap_sleep_nav_bar_title"
-            android:summary="@string/double_tap_sleep_nav_bar_summary"
-            android:defaultValue="false" />
 
         <com.android.settings.cyanogenmod.SecureSettingSwitchPreference
             android:key="search_panel_enabled"
