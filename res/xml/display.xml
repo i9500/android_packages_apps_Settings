@@ -44,33 +44,20 @@
                 android:summary="@string/live_display_summary"
                 android:fragment="com.android.settings.livedisplay.LiveDisplay" />
 
-        <!-- Doze // Ambient display -->
+        <!-- Doze // Ambient display advanced -->
         <PreferenceScreen
                 android:key="doze_fragment"
                 android:title="@string/doze_title"
-                android:fragment="com.android.settings.euphoria.ambientdisplay.AmbientSettings" />
-
-        <!-- Rotation modes -->
-        <PreferenceScreen
-                android:key="display_rotation"
-                android:title="@string/display_rotation_title"
-                android:fragment="com.android.settings.cyanogenmod.DisplayRotation"
+                android:fragment="com.android.settings.euphoria.ambientdisplay.AmbientSettings"
                 settings:advanced="true"/>
 
-        <!-- Auto rotate screen -->
+        <!-- Doze // Ambient display -->
         <SwitchPreference
-                android:key="accelerometer"
-                android:title="@string/accelerometer_title"
-                settings:advanced="false"/>
-
-        <!-- Seconds before sleep -->
-        <ListPreference
-                android:key="screen_timeout"
-                android:title="@string/screen_timeout"
-                android:summary="@string/screen_timeout_summary"
+                android:key="doze"
+                android:title="@string/doze_title"
+                android:summary="@string/doze_summary"
                 android:persistent="false"
-                android:entries="@array/screen_timeout_entries"
-                android:entryValues="@array/screen_timeout_values" />
+                settings:advanced="false"/>
 
         <!-- Lift to wake -->
         <SwitchPreference
@@ -106,6 +93,28 @@
                 android:summary="@string/wake_when_plugged_or_unplugged_summary"
                 android:defaultValue="false"
                 settings:advanced="true"/>
+
+        <!-- Rotation modes -->
+        <PreferenceScreen
+                android:key="display_rotation"
+                android:title="@string/display_rotation_title"
+                android:fragment="com.android.settings.cyanogenmod.DisplayRotation"
+                settings:advanced="true"/>
+
+        <!-- Auto rotate screen -->
+        <SwitchPreference
+                android:key="accelerometer"
+                android:title="@string/accelerometer_title"
+                settings:advanced="false"/>
+
+        <!-- Seconds before sleep -->
+        <ListPreference
+                android:key="screen_timeout"
+                android:title="@string/screen_timeout"
+                android:summary="@string/screen_timeout_summary"
+                android:persistent="false"
+                android:entries="@array/screen_timeout_entries"
+                android:entryValues="@array/screen_timeout_values" />
 
         <!-- Cast screen -->
         <PreferenceScreen
