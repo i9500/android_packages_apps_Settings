@@ -25,7 +25,6 @@ import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.hardware.CmHardwareManager;
-import android.media.AudioSystem;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Handler;
@@ -71,7 +70,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
-    private static final String KEY_VOLUME_DEFAULT = "volume_default_screen";
     private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
     private static final String KEY_NAVIGATION_RECENTS_LONG_PRESS = "navigation_recents_long_press";
@@ -126,7 +124,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mVolumeWakeScreen;
     private SwitchPreference mVolumeMusicControls;
     private SwitchPreference mSwapVolumeButtons;
-    private ListPreference mVolumeDefault;
     private SwitchPreference mDisableNavigationKeys;
     private SwitchPreference mNavigationBarLeftPref;
     private ListPreference mNavigationRecentsLongPressAction;
@@ -198,28 +195,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     prefScreen.findPreference(KEY_SWAP_VOLUME_BUTTONS);
             if (mSwapVolumeButtons != null) {
                 mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
-            }
-
-            mVolumeDefault = (ListPreference) findPreference(KEY_VOLUME_DEFAULT);
-            String currentDefault = Settings.System.getString(getContentResolver(),
-                Settings.System.VOLUME_KEYS_DEFAULT);
-            boolean linkNotificationWithVolume = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
-            if (mVolumeDefault != null && !Utils.isVoiceCapable(getActivity())) {
-                removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_RING));
-            } else if (mVolumeDefault != null && linkNotificationWithVolume
-                    && Utils.isVoiceCapable(getActivity())) {
-                removeListEntry(mVolumeDefault, String.valueOf(AudioSystem.STREAM_NOTIFICATION));
-            }
-            if (mVolumeDefault != null) {
-                if (currentDefault == null) {
-                    currentDefault = mVolumeDefault.getEntryValues()
-                        [mVolumeDefault.getEntryValues().length - 1].toString();
-                    mVolumeDefault.setSummary(getString(R.string.volume_default_summary));
-                }
-                mVolumeDefault.setValue(currentDefault);
-                mVolumeDefault.setSummary(mVolumeDefault.getEntry());
-                mVolumeDefault.setOnPreferenceChangeListener(this);
             }
         }
 
@@ -569,31 +544,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         Settings.System.putInt(getContentResolver(), setting, Integer.valueOf(value));
     }
 
-    public void removeListEntry(ListPreference list, String valuetoRemove) {
-        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
-        ArrayList<CharSequence> values = new ArrayList<CharSequence>();
-
-        for (int i = 0; i < list.getEntryValues().length; i++) {
-            if (list.getEntryValues()[i].toString().equals(valuetoRemove)) {
-                continue;
-            } else {
-                entries.add(list.getEntries()[i]);
-                values.add(list.getEntryValues()[i]);
-            }
-        }
-
-        list.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        list.setEntryValues(values.toArray(new CharSequence[values.size()]));
-    }
-
-    private void updateVolumeDefault(Object newValue) {
-        int index = mVolumeDefault.findIndexOfValue((String) newValue);
-        int value = Integer.valueOf((String) newValue);
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.System.VOLUME_KEYS_DEFAULT, value);
-        mVolumeDefault.setSummary(mVolumeDefault.getEntries()[index]);
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mHomeLongPressAction) {
@@ -645,12 +595,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             }
             Settings.Secure.putString(getContentResolver(),
                     Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY, putString);
-            return true;
-        } else if (preference == mVolumeDefault) {
-            String value = (String) newValue;
-            Settings.System.putString(getActivity().getContentResolver(),
-                Settings.System.VOLUME_KEYS_DEFAULT, value);
-            updateVolumeDefault(newValue);
             return true;
         }
         return false;
