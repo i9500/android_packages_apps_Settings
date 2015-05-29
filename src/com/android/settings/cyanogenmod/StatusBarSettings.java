@@ -169,10 +169,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             generalCategory.removePreference(mShowCarrierLabel);
         }
 
-        if (TelephonyManager.getDefault().getPhoneCount() <= 1) {
-            generalCategory.removePreference(mShowEmptySims);
-        }
-
         if (!Utils.isPackageInstalled(getActivity(), KEY_LOCK_CLOCK_PACKAGE_NAME)) {
             weatherCategory.removePreference(mLockClock);
         }
