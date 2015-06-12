@@ -22,6 +22,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -65,6 +66,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String SHOW_CARRIER_LABEL = "status_bar_show_carrier";
     private static final String SHOW_EMPTY_SIMS = "status_bar_show_empty_sims";
+    private static final String BREATHING_NOTIFICATIONS = "breathing_notifications";
 
     private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCK_CLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
@@ -86,6 +88,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private ListPreference mShowCarrierLabel;
     private SwitchPreference mShowEmptySims;
     private PreferenceScreen mLockClock;
+    private PreferenceScreen mBreathingNotifications;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,6 +96,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.status_bar_settings);
         ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefSet = getPreferenceScreen();
+        Context context = getActivity();
+        ConnectivityManager cm = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         final PreferenceCategory generalCategory =
                 (PreferenceCategory) prefSet.findPreference(GENERAL_CATEGORY);
@@ -110,6 +116,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mShowCarrierLabel = (ListPreference) findPreference(SHOW_CARRIER_LABEL);
         mShowEmptySims = (SwitchPreference) findPreference(SHOW_EMPTY_SIMS);
         mLockClock = (PreferenceScreen) findPreference(KEY_LOCK_CLOCK);
+        mBreathingNotifications = (PreferenceScreen) findPreference(BREATHING_NOTIFICATIONS);
 
         int clockStyle = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_CLOCK, 1);
@@ -171,6 +178,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
         if (!Utils.isPackageInstalled(getActivity(), KEY_LOCK_CLOCK_PACKAGE_NAME)) {
             weatherCategory.removePreference(mLockClock);
+        }
+
+        if (!cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
+            generalCategory.removePreference(mBreathingNotifications);
         }
 
         enableStatusBarClockDependents();
