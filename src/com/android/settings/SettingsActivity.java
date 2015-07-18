@@ -91,7 +91,6 @@ import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
-import com.android.settings.euphoria.CustomSettings;
 import com.android.settings.euphoria.ambientdisplay.AmbientSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -263,7 +262,6 @@ public class SettingsActivity extends Activity
             R.id.home_settings,
             R.id.dashboard,
             R.id.privacy_settings_cyanogenmod,
-            R.id.custom_settings,
             R.id.status_bar_settings,
             R.id.notification_drawer_settings,
             R.id.theme_settings,
