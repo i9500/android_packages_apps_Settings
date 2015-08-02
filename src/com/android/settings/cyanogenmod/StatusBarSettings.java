@@ -67,6 +67,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String SHOW_CARRIER_LABEL = "status_bar_show_carrier";
     private static final String SHOW_EMPTY_SIMS = "status_bar_show_empty_sims";
     private static final String BREATHING_NOTIFICATIONS = "breathing_notifications";
+    private static final String STATUS_BAR_TEMPERATURE_STYLE = "status_bar_temperature_style";
 
     private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCK_CLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
@@ -89,6 +90,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private SwitchPreference mShowEmptySims;
     private PreferenceScreen mLockClock;
     private PreferenceScreen mBreathingNotifications;
+    private ListPreference mStatusBarTemperature;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -171,6 +173,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mShowCarrierLabel.setValue(String.valueOf(showCarrierLabel));
         mShowCarrierLabel.setSummary(mShowCarrierLabel.getEntry());
         mShowCarrierLabel.setOnPreferenceChangeListener(this);
+
+        mStatusBarTemperature = (ListPreference) findPreference(STATUS_BAR_TEMPERATURE_STYLE);
+        int temperatureStyle = Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, 0);
+        mStatusBarTemperature.setValue(String.valueOf(temperatureStyle));
+        mStatusBarTemperature.setSummary(mStatusBarTemperature.getEntry());
+        mStatusBarTemperature.setOnPreferenceChangeListener(this);
 
         if (!Utils.isVoiceCapable(getActivity())) {
             generalCategory.removePreference(mShowCarrierLabel);
@@ -299,6 +308,14 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             Settings.System.putInt(
                     resolver, Settings.System.STATUS_BAR_SHOW_CARRIER, showCarrierLabel);
             mShowCarrierLabel.setSummary(mShowCarrierLabel.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarTemperature) {
+            int temperatureStyle = Integer.valueOf((String) newValue);
+            int index = mStatusBarTemperature.findIndexOfValue((String) newValue);
+            Settings.System.putInt(
+                    resolver, Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, temperatureStyle);
+            mStatusBarTemperature.setSummary(
+                    mStatusBarTemperature.getEntries()[index]);
             return true;
         }
         return false;
