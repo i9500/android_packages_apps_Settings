@@ -135,6 +135,16 @@
                 android:title="@string/animation_title"
                 android:fragment="com.android.settings.euphoria.animation.AnimationSettings"
                 settings:advanced="true"/>
+
+        <!-- Screen shot delay -->
+        <com.android.settings.euphoria.SeekBarPreference
+                android:key="screenshot_delay"
+                android:title="@string/powermenu_screenshot_delay_title"
+                android:max="10"
+                settings:minimum="1"
+                settings:unitsRight="sec"
+                android:persistent="false"
+                settings:advanced="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory

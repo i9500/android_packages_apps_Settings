@@ -76,6 +76,7 @@ import java.util.List;
 import com.android.internal.util.cm.QSUtils;
 
 import com.android.settings.cyanogenmod.DisplayRotation;
+import com.android.settings.euphoria.SeekBarPreference;
 import com.android.settings.Utils;
 
 import cyanogenmod.hardware.CMHardwareManager;
@@ -104,12 +105,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
-
     private static final String KEY_DOZE = "doze";
     private static final String KEY_DOZE_FRAGMENT = "doze_fragment";
-
     private static final String DISABLE_TORCH_ON_SCREEN_OFF = "disable_torch_on_screen_off";
     private static final String DISABLE_TORCH_ON_SCREEN_OFF_DELAY = "disable_torch_on_screen_off_delay";
+    private static final String SCREENSHOT_DELAY = "screenshot_delay";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -131,6 +131,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTorchOff;
     private ListPreference mTorchOffDelay;
     private SwitchPreference mProximityWakePreference;
+    private SeekBarPreference mScreenshotDelay;
 
     private CMHardwareManager mHardware;
 
@@ -300,6 +301,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mTorchOffDelay.setValue(String.valueOf(torchOffDelay));
             mTorchOffDelay.setSummary(mTorchOffDelay.getEntry());
             mTorchOffDelay.setOnPreferenceChangeListener(this);
+        }
+
+        mScreenshotDelay =
+                (SeekBarPreference) findPreference(SCREENSHOT_DELAY);
+        if (mScreenshotDelay != null) {
+            int screenshotDelay = Settings.System.getInt(resolver,
+                    Settings.System.SCREENSHOT_DELAY, 2);
+            mScreenshotDelay.setValue(screenshotDelay);
+            mScreenshotDelay.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -721,6 +731,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE,
                     value ? 1 : 0);
+        }
+        if (preference == mScreenshotDelay) {
+            int screenshotDelay = (Integer) objValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREENSHOT_DELAY, screenshotDelay);
         }
         return true;
     }
